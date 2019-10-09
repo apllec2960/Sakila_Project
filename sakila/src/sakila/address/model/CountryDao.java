@@ -9,6 +9,32 @@ import sakila.db.DBHelper;
 
 public class CountryDao {
 	
+	public List<Country> selectCountryListAll(){
+		List<Country> list = new ArrayList<Country>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT country_id, country FROM country ORDER BY country_id DESC";
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Country c = new Country();
+				c.setCountryId(rs.getInt("country_id"));
+				c.setCountry(rs.getString("country"));
+				list.add(c);
+			}
+		}	catch(Exception e) {
+			e.printStackTrace();
+		}	finally {
+			DBHelper.close(rs, stmt, conn);
+		}
+		return list;
+	}
+	
 	//country ���̺��� ��� ���� ���� �����ִ� �޼ҵ�
 	public int selectCount() {
 		int count =  0;
