@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sakila.address.model.*;
+import sakila.customer.model.Country;
 
 @WebServlet("/address/insertCountry")
 public class InsertCountry extends HttpServlet {

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import sakila.address.model.*;
+import sakila.customer.model.Country;
 
 @WebServlet("/address/selectCountryList")
 public class SelectCountryList extends HttpServlet {

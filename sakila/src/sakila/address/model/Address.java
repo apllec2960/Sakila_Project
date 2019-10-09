@@ -1,5 +1,7 @@
 package sakila.address.model;
 
+import sakila.customer.model.City;
+
 public class Address {
 	private int addressId;
 	private String address;

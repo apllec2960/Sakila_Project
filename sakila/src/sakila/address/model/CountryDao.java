@@ -3,11 +3,13 @@ package sakila.address.model;
 import java.sql.*;
 import java.util.*;
 import javax.servlet.RequestDispatcher;
+
+import sakila.customer.model.Country;
 import sakila.db.DBHelper;
 
 public class CountryDao {
 	
-	//country Å×ÀÌºíÀÇ ¸ðµç ÇàÀÇ ¼ö¸¦ ±¸ÇØÁÖ´Â ¸Þ¼Òµå
+	//country ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½
 	public int selectCount() {
 		int count =  0;
 		Connection conn = null;
@@ -15,36 +17,36 @@ public class CountryDao {
 		String sql = "SELECT COUNT(*) FROM country ";
 		ResultSet rs = null;
 		try {
-			conn = DBHelper.getConnection();	//mariadb¿¬°á½ÃÄÑÁÖ´Â ¸Þ¼Òµå  .getConnection()
-			stmt = conn.prepareStatement(sql);	//Äõ¸®¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ð, ÀúÀå.
-			rs = stmt.executeQuery();			//Äõ¸®½ÇÇà
+			conn = DBHelper.getConnection();	//mariadbï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½  .getConnection()
+			stmt = conn.prepareStatement(sql);	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½.
+			rs = stmt.executeQuery();			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) {
-				count = rs.getInt("COUNT(*)");	//¸ðµç ÇàÀÇ¼ö¸¦ count º¯¼ö¿¡ ÀúÀå.
+				count = rs.getInt("COUNT(*)");	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ count ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			}
 			//System.out.println("CountryDao count : " + count);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBHelper.close(rs, stmt, conn); 	//¸ðµç ¿¬°áÀ» ²÷¾îÁÖ´Â ¸Þ¼Òµå .close()
+			DBHelper.close(rs, stmt, conn); 	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½ .close()
 		}
 		return count;
 	}
 	
-	//CountryÅ×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ ¸®½ºÆ®·Î Ãâ·ÂÇÏ´Â ¸Þ¼Òµå( )
+	//Countryï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½( )
 	public List<Country> selectCountryList(int currentPage){
 		List<Country> list = new ArrayList<Country>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "SELECT * FROM country ORDER BY country_id DESC LIMIT ?,?";
 		ResultSet rs = null;
-		final int ROW_PER_PAGE =10;			//rowPerPage : º¸¿©ÁÙ Çà (10À¸·Î °íÁ¤)
-		int beginRow = (currentPage-1)*ROW_PER_PAGE; //beginRow : ½ÃÀÛÇÏ´Â Çà
+		final int ROW_PER_PAGE =10;			//rowPerPage : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (10ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+		int beginRow = (currentPage-1)*ROW_PER_PAGE; //beginRow : ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
 		
 		try {
 			conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, beginRow);		//Ã¹¹ø¤Š ? ÀúÀå
-			stmt.setInt(2, ROW_PER_PAGE);	//µÎ¹øÂ° ? ÀúÀå
+			stmt.setInt(1, beginRow);		//Ã¹ï¿½ï¿½ï¿½ï¿½ ? ï¿½ï¿½ï¿½ï¿½
+			stmt.setInt(2, ROW_PER_PAGE);	//ï¿½Î¹ï¿½Â° ? ï¿½ï¿½ï¿½ï¿½
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Country c = new Country();
@@ -62,7 +64,7 @@ public class CountryDao {
 		return list;
 	}
 	
-	//countryÅ×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ »ðÀÔÇÒ¼öÀÖ°Ô ÇØÁÖ´Â ¸Þ¼Òµå
+	//countryï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½
 	public void insertCountry(Country country) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
