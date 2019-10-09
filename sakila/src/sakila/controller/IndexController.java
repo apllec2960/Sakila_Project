@@ -56,6 +56,7 @@ public class IndexController extends HttpServlet {
 	private LanguageDao languageDao;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	response.setContentType("application/json; charset=utf-8");
+	System.out.println("IndexControllerServlet 실행::");
 	
 	//List<Integer> list = new ArrayList<Integer>();
 	Map<String, Integer> map = new HashMap<String, Integer>();
