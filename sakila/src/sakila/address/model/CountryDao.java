@@ -35,7 +35,7 @@ public class CountryDao {
 		return list;
 	}
 	
-	//country ���̺��� ��� ���� ���� �����ִ� �޼ҵ�
+	//country 테이블에 행의 수를 구하는 메소드
 	public int selectCount() {
 		int count =  0;
 		Connection conn = null;
@@ -43,22 +43,22 @@ public class CountryDao {
 		String sql = "SELECT COUNT(*) FROM country ";
 		ResultSet rs = null;
 		try {
-			conn = DBHelper.getConnection();	//mariadb��������ִ� �޼ҵ�  .getConnection()
-			stmt = conn.prepareStatement(sql);	//������ ������ ���� ����, ����.
-			rs = stmt.executeQuery();			//��������
+			conn = DBHelper.getConnection();	//mariadb연결해주는 메소드  .getConnection()
+			stmt = conn.prepareStatement(sql);	
+			rs = stmt.executeQuery();			//쿼리 실행
 			if(rs.next()) {
-				count = rs.getInt("COUNT(*)");	//��� ���Ǽ��� count ������ ����.
+				count = rs.getInt("COUNT(*)");	//coutry테이블의 행의 수를 count변수에 저장.
 			}
 			//System.out.println("CountryDao count : " + count);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBHelper.close(rs, stmt, conn); 	//��� ������ �����ִ� �޼ҵ� .close()
+			DBHelper.close(rs, stmt, conn); 	
 		}
 		return count;
 	}
 	
-	//Country���̺��� �����͸� ����Ʈ�� ����ϴ� �޼ҵ�( )
+	//Country리스트를 출력하게 만드는 메소드
 	public List<Country> selectCountryList(int currentPage){
 		List<Country> list = new ArrayList<Country>();
 		Connection conn = null;
@@ -90,7 +90,7 @@ public class CountryDao {
 		return list;
 	}
 	
-	//country���̺� �����͸� �����Ҽ��ְ� ���ִ� �޼ҵ�
+	//country테이블에 데이터를 입력하는 메소드
 	public void insertCountry(Country country) {
 		Connection conn = null;
 		PreparedStatement stmt = null;

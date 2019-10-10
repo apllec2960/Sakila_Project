@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import sakila.db.DBHelper;
 
 public class StaffDao {
+	//스태프 테이블에 행의 수를 구하는 메소드
 	public int selectStaffCount() {
 		Connection conn = null;
 		PreparedStatement stmt = null;

@@ -18,13 +18,14 @@ import sakila.address.model.CountryDao;
 public class SelectCountryCount extends HttpServlet {
 	private CountryDao countryDao;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	System.out.println("SelectCountryCount Servletì‹¤í–‰ ::");
 	response.setContentType("application/json");
 		
 	countryDao = new CountryDao();
 	int count = countryDao.selectCount();
 	Gson gson = new Gson();
 	String jsonCount = gson.toJson(count);
-	response.getWriter().write(jsonCount); //write(jsonCount)¸¸ ÀÀ´äÇØ¶ó.
+	response.getWriter().write(jsonCount); //write(jsonCount)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½.
 	
 	}
 

@@ -1,5 +1,7 @@
 package sakila.address.model;
 
+import java.sql.Statement;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +13,17 @@ import sakila.db.DBHelper;
 
 public class AddressDao {
 	
-	//address테이블에 데이터를 추가할수있는 메소드.
-	public void insertAddress(Address address) {
-		Connection conn = null;
+	
+	
+	//address테이블에 데이터를 삽입하는 메소드
+	public int insertAddress(Connection conn, Address address) throws Exception {
+		int addressId = 0;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		String sql = "INSERT INTO address(address_id,address,address2,city_id,district,postal_code,phone, last_update,) VALUES(?,?,?,?,?,?,?, now())";
-		try {
-			conn = DBHelper.getConnection();
-			stmt = conn.prepareStatement(sql);
+		
+			//conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,address.getAddressId());
 			stmt.setString(2,address.getAddress());
 			stmt.setString(3,address.getAddress2());
@@ -26,18 +31,17 @@ public class AddressDao {
 			stmt.setString(5,address.getDistrict());
 			stmt.setString(6,address.getPostalCode());
 			stmt.setString(7,address.getPhone());
-			
 			stmt.executeUpdate();
-			
-		}	catch(Exception e) {
-			e.printStackTrace();
-		}	finally {
-			DBHelper.close(null, stmt, conn);
-		}
+			rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				addressId= rs.getInt(1);
+			}
+		
+		return addressId;
 	}
 	
 	
-	//address 테이블의 데이터를 리스트로 나타낼 메소드
+	//address 테이블에 데이터를 리스트로 출력하는 메소드
 	public List<Address> selectAddressList(){
 		List<Address> list = new ArrayList<Address>();
 		Connection conn = null;

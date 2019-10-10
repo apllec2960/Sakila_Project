@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import sakila.db.DBHelper;
 
 public class PaymentDao {
+	
+	//payment테이블에 행의수를 구하는 메소드
 	public int selectPaymentCount() {
 		Connection conn = null;
 		PreparedStatement stmt = null;

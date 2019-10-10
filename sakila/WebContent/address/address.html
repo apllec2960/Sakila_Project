@@ -39,12 +39,7 @@
 <body>
     <div id="aside">
         <h1>MENU</h1>
-        <ul>
-        	<li><a href="">Address</a></li>
-        	<li><a href="/sakila/customerList">Customer</a></li>
-        	<li><a href="">Business</a></li>
-        	<li><a href="">Inventory</a></li>
-        </ul>
+
     </div>
     <div id="section">
         <h1>Address</h1>
@@ -62,8 +57,8 @@
                </div>               
             </td>         
             <td>               
-               coutry_id: <input type="text" id="country" readonly="readonly"><hr>
-               city_id: <input type="text" id="city" readonly="readonly"><hr>
+               coutry_id: <input type="text" id="countryId" readonly="readonly"><hr>
+               city_id: <input type="text" id="cityId" readonly="readonly"><hr>
                address: <input type="text" id="address" ><hr>
                address2: <input type="text" id="address2" ><hr>
                district: <input type="text" id="district" ><hr>
@@ -97,6 +92,7 @@
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>$("#aside").load("/sakila/aside.html");</script>
 <script>
 	
 	$.ajax({
@@ -114,6 +110,32 @@
 			});
 		}
 	});
+	
+	   // 나라 선택시 나라 번호 출력 / city list select
+	   $("#countryList").change(function(){
+	      $("#countryId").val($("#countryList").val());   // countryId값이 있을 장소에 countryList의 값을 넣는다.
+	      $("#cityList").empty();
+	      // when country selected -> 도시 목록 출력
+	      $.ajax({
+	         url:"/sakila/address/selectCityListByCountry", 
+	         method: "POST",
+	         data : {"countryId" : $("#countryList").val()},
+	         success : function(json){
+	            $(json).each(function(index, item){
+	               temp="<option value='";
+	               temp+=item.cityId;
+	               temp+="'>";
+	               temp+=item.city;
+	               temp+="</option>";
+	               $("#cityList").append(temp);
+	            });
+	         }
+	      });
+	   });
+	   // 도시 선택시 도시 번호 출력 
+	   $("#cityList").change(function(){
+	      $("#cityId").val($("#cityList").val());
+	   });
 	
 	$("#countryList").change(function(){ 
 		$.ajax({
@@ -158,79 +180,6 @@
 		}					
 	});  
 	
-	/*// city insert하기
-	$("#addAddress").click(function(){
-		console.log("success");
-		//비었는지 확인
-		if($("#country").val() === "" ){
-			alert("country 입력하세요");
-			return;
-		}
-		if($("#city").val() === "" ){
-			alert("city 입력하세요");
-			return;
-		}
-		if($("#address").val() === "" ){
-			alert("address 입력하세요");
-			return;
-		}
-		if($("#address2").val() === "" ){
-			alert("address2 입력하세요");
-			return;
-		}
-		if($("#district").val() === "" ){
-			alert("district 입력하세요");
-			return;
-		}
-		if($("#postal_code").val() === "" ){
-			alert("postal_code 입력하세요");
-			return;
-		}
-		if($("#phone").val() === "" ){
-			alert("phone 입력하세요");
-			return;
-		}
-	 	/*ajax요청 ,비동기 방식
-		$.ajax({ 
-			url	: "/sakila/insertAddress",
-			method : "post",
-			data : {"country" : $("#country").val(),
-				"city" : $("#city").val()},
-				"address" : $("#address").val()},
-				"address2" : $("#address2").val()},
-				"district" : $("#district").val()},
-				"postal_code" : $("#postal_code").val()},
-				"phone" : $("#phone").val()},
-				
-			success : function(){
-				console.log("Address INSERT success");
-				currentPage = 1;
-				//버튼값 입력 성공 후 데이터를 불러오기 위해
-				$("#list").empty();
-				$.ajax({
-					url : "/sakila/selectAddressList",
-					method : "post",
-					success : function(json){ //json -> 자바스크립트의 객체로 변경							
-					console.log(json);
-					for(let c of json){
-						let html = "<tr>";
-						html += "<td>"+c.addressId+"</td>";
-						html += "<td>"+c.address+"</td>";
-						html += "<td>"+c.address2+"</td>";
-						html += "<td>"+c.district+"</td>";
-						html += "<td>"+c.city.cityId+"</td>";
-						html += "<td>"+c.postalCode+"</td>";
-						html += "<td>"+c.phone+"</td>";
-						html += "<td>"+c.lastUpdate+"</td>";
-						html += "</tr>";
-						$("#list").append(html);
-						}							
-					}					
-				});
-			}
-		});
-	});
-	*/
 	
 	
 </script>
