@@ -20,23 +20,23 @@ public class AddressDao {
 		int addressId = 0;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "INSERT INTO address(address_id,address,address2,city_id,district,postal_code,phone, last_update,) VALUES(?,?,?,?,?,?,?, now())";
+		String sql = "INSERT INTO address(address,address2,city_id,district,postal_code,phone, last_update) VALUES(?,?,?,?,?,?, now())";
 		
+			System.out.println("insertAddress cityId : " + address.getCity().getCityId());
 			//conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,address.getAddressId());
-			stmt.setString(2,address.getAddress());
-			stmt.setString(3,address.getAddress2());
-			stmt.setInt(4,address.getCity().getCityId());
-			stmt.setString(5,address.getDistrict());
-			stmt.setString(6,address.getPostalCode());
-			stmt.setString(7,address.getPhone());
+			stmt.setString(1,address.getAddress());
+			stmt.setString(2,address.getAddress2());
+			stmt.setInt(3,address.getCity().getCityId());
+			stmt.setString(4,address.getDistrict());
+			stmt.setString(5,address.getPostalCode());
+			stmt.setString(6,address.getPhone());
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			if(rs.next()) {
 				addressId= rs.getInt(1);
 			}
-		
+		stmt.close();
 		return addressId;
 	}
 	

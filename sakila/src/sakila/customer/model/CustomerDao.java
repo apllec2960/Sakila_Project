@@ -12,10 +12,12 @@ public class CustomerDao {
 	public void insertCustomer(Connection conn, Customer customer) throws Exception {
 		PreparedStatement stmt = null;
 		String sql = "INSERT INTO customer("
-				+ "store_id, first_name, last_name, email, address_id, active, create_date, last_update,)"
+				+ "store_id, first_name, last_name, email, address_id, active, create_date, last_update)"
 				+ " VALUES(?,?,?,?,?,1,now(), now())";
-	
-			conn = DBHelper.getConnection();
+			
+			System.out.println("insertCustomer" + customer.getAddressId());
+			
+			//conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql);
 			
 			stmt.setInt(1,customer.getStoreId());
@@ -25,6 +27,7 @@ public class CustomerDao {
 			stmt.setInt(5,customer.getAddressId());
 			
 			stmt.executeUpdate();
+			stmt.close();
 	}
 	
 	//customer테이블에 행의 수를 구하는 메소드
