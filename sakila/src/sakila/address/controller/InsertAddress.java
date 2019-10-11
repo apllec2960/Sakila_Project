@@ -46,7 +46,6 @@ public class InsertAddress extends HttpServlet {
 		ad.setPostalCode(postalCode);
 		ad.setPhone(phone);
 		
-		addressDao.insertAddress(ad);
 	}
 
 }
