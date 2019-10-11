@@ -1,8 +1,11 @@
 package sakila.customer.model;
 
+import sakila.address.model.Address;
+import sakila.business.model.Store;
+
 public class Customer {
 	private int customerId;
-	//private Store store;
+	private Store store;
 	private String firstName;
 	private int storeId;
 	private String lastName;
@@ -11,6 +14,8 @@ public class Customer {
 	private int active;
 	private String createDate;
 	private String lastUpdate;
+	private Address address;
+	
 	
 	public int getCustomerId() {
 		return customerId;
@@ -66,5 +71,18 @@ public class Customer {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public Store getStore() {
+		return store;
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	
 	
 }

@@ -86,10 +86,61 @@
              </fieldset>
          <button type="button" id="addCustomer">고객추가</button>
 	</form>   
+		<div>
+			<table border ="1">
+				<thead>
+					<tr>
+						<th>city_id</th>
+						<th>address</th>
+						<th>address2</th>
+						<th>district</th>
+						<th>postal_code</th>
+						<th>phone</th>
+						<th>storeId</th>
+						<th>firstName</th>
+						<th>lastName</th>
+						<th>emailName</th>
+					</tr>
+				</thead>
+				<tbody id="list">
+					
+				</tbody>
+			</table>
+		</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>$("#aside").load("/sakila/aside.html");</script>
 <script>
+	
+	//기존의 리스트 불러오기
+	$("#list").empty();
+	$.ajax({
+		url : "/sakila/customer/selectCustomerList",
+		method : "POST",
+		success : function(json){ //json -> 자바스크립트의 객체로 변경							
+			console.log("successs~!!!");
+			console.log(json);
+		for(let c of json){
+			let html = "<tr>";
+			html += "<td>"+c.address.city.cityId+"</td>";
+			html += "<td>"+c.address.address+"</td>";
+			html += "<td>"+c.address.address2+"</td>";
+			html += "<td>"+c.address.district+"</td>";
+			html += "<td>"+c.address.postalCode+"</td>";
+			html += "<td>"+c.address.phone+"</td>";
+			html += "<td>"+c.store.storeId+"</td>";
+			html += "<td>"+c.firstName+"</td>";
+			html += "<td>"+c.lastName+"</td>";
+			html += "<td>"+c.email+"</td>";
+			html += "</tr>";
+			$("#list").append(html);
+			}							
+		}					
+	});  
+
+
+
+
 	$.ajax({
 		url : "/sakila/address/selectCountryListAll",
 		method : "POST",

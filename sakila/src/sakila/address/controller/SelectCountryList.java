@@ -24,7 +24,6 @@ public class SelectCountryList extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		response.setContentType("application/json");
 		countryDao = new CountryDao();
 		List<Country> list = countryDao.selectCountryList(currentPage);
 		
