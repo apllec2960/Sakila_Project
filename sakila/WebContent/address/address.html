@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>sakila index</title>
+<title>sakila - address</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
@@ -34,6 +34,7 @@
         margin-bottom: 100px;
         background: white;
     }
+
 </style>
 </head>
 <body>
@@ -62,7 +63,7 @@
                address: <input type="text" id="address" ><hr>
                address2: <input type="text" id="address2" ><hr>
                district: <input type="text" id="district" ><hr>
-               postal_code: <input type="text" id="postal_code" ><hr>
+               postal_code: <input type="text" id="postalCode" ><hr>
                phone: <input type="text" id="phone" ><hr>
                <button type="button" id="addAddress"> insert > </button><hr>
             </td>
@@ -95,6 +96,7 @@
 <script>$("#aside").load("/sakila/aside.html");</script>
 <script>
 	
+	//도시 리스트 력
 	$.ajax({
 		url : "/sakila/address/selectCountryListAll",
 		method : "POST",
@@ -149,14 +151,13 @@
 					temp += item.cityId;
 					temp += "'>";
 					temp += item.city;
-					
-					
 					temp += "</option>";
 					$("#cityList").append(temp);
 				});
 			}
 		});
 	});
+	
 	//기존의 리스트 불러오기
 	$("#list").empty();
 	$.ajax({
@@ -179,6 +180,79 @@
 			}							
 		}					
 	});  
+	
+	//address 정보 입력.
+	$("#addAddress").click(function(){
+		console.log("실행")
+			//비었는지 확인
+			if($("#countryId").val() === "" ){
+				alert("country 입력하세요");
+				return;
+			}
+			if($("#cityId").val() === "" ){
+				alert("city 입력하세요");
+				return;
+			}
+			if($("#address").val() === "" ){
+				alert("address 입력하세요");
+				return;
+			}
+			if($("#address2").val() === "" ){
+				alert("address2 입력하세요");
+				return;
+			}
+			if($("#district").val() === "" ){
+				alert("district 입력하세요");
+				return;
+			}
+			if($("#postal_code").val() === "" ){
+				alert("postal_code 입력하세요");
+				return;
+			}
+			if($("#phone").val() === "" ){
+				alert("phone 입력하세요");
+				return;
+			}
+		 	//ajax요청 ,비동기 방식
+			$.ajax({ 
+				url	: "/sakila/address/insertAddress",
+				method : "post",
+				data : {
+						"cityId" : $("#cityId").val(),
+						"address" : $("#address").val(),
+						"address2" : $("#address2").val(),
+						"district" : $("#district").val(),
+						"postalCode" : $("#postalCode").val(),
+						"phone" : $("#phone").val()
+					},
+				success : function(){
+					console.log("Address INSERT success");
+					currentPage = 1;
+					//버튼값 입력 성공 후 데이터를 불러오기 위해
+					$("#list").empty();
+					$.ajax({
+						url : "/sakila/address/selectAddressList",
+						method : "post",
+						success : function(json){ //json -> 자바스크립트의 객체로 변경							
+						console.log(json);
+						for(let c of json){
+							let html = "<tr>";
+							html += "<td>"+c.addressId+"</td>";
+							html += "<td>"+c.address+"</td>";
+							html += "<td>"+c.address2+"</td>";
+							html += "<td>"+c.district+"</td>";
+							html += "<td>"+c.city.cityId+"</td>";
+							html += "<td>"+c.postalCode+"</td>";
+							html += "<td>"+c.phone+"</td>";
+							html += "<td>"+c.lastUpdate+"</td>";
+							html += "</tr>";
+							$("#list").append(html);
+							}							
+						}					
+					});
+				}
+			});
+		});
 	
 	
 	

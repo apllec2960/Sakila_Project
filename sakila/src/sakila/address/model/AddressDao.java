@@ -1,12 +1,13 @@
 package sakila.address.model;
 
 import java.sql.Statement;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import sakila.customer.model.City;
 import sakila.db.DBHelper;
@@ -16,28 +17,33 @@ public class AddressDao {
 	
 	
 	//address테이블에 데이터를 삽입하는 메소드
-	public int insertAddress(Connection conn, Address address) throws Exception {
-		int addressId = 0;
+	public int insertAddress( Address address, Connection conn) {
+		System.out.println("insertAddressDao");
+		System.out.println(address.toString());
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "INSERT INTO address(address,address2,city_id,district,postal_code,phone, last_update) VALUES(?,?,?,?,?,?, now())";
-		
-			System.out.println("insertAddress cityId : " + address.getCity().getCityId());
-			//conn = DBHelper.getConnection();
-			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "INSERT INTO address(address,address2,city_id,district,postal_code,phone, last_update) "
+					+ "VALUES(?,?,?,?,?,?, now())";
+		System.out.println(address.getCity().getCityId());
+		try {
+			
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,address.getAddress());
 			stmt.setString(2,address.getAddress2());
 			stmt.setInt(3,address.getCity().getCityId());
 			stmt.setString(4,address.getDistrict());
 			stmt.setString(5,address.getPostalCode());
 			stmt.setString(6,address.getPhone());
+			
 			stmt.executeUpdate();
-			rs = stmt.getGeneratedKeys();
-			if(rs.next()) {
-				addressId= rs.getInt(1);
-			}
-		stmt.close();
-		return addressId;
+			
+		}	catch(Exception e) {
+			e.printStackTrace();
+		}	finally {
+			DBHelper.close(null, stmt, conn);
+		}
+		return 0;
 	}
 	
 	
@@ -48,7 +54,8 @@ public class AddressDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT a.address_id, a.address, a.address2, a.district, ct.city_id, a.postal_code, "
-				+ "a.phone, a.last_update FROM address a INNER JOIN city ct ON ct.city_id = a.city_id LIMIT 10";
+				+ "a.phone, a.last_update FROM address a INNER JOIN city ct ON ct.city_id = a.city_id "
+				+ "ORDER BY a.last_update DESC LIMIT 10";
 		try {
 			conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql);

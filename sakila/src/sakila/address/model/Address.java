@@ -11,6 +11,7 @@ public class Address {
 	private String postalCode;
 	private String phone;
 	private String lastUpdate;
+	
 	public int getAddressId() {
 		return addressId;
 	}
@@ -59,4 +60,12 @@ public class Address {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", address=" + address + ", address2=" + address2 + ", district="
+				+ district + ", city=" + city + ", postalCode=" + postalCode + ", phone=" + phone + ", lastUpdate="
+				+ lastUpdate + "]";
+	}
+	
+	
 }

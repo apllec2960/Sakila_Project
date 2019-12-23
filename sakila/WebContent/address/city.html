@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>sakila index</title>
+<title>sakila - city</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <style>
     body {
         padding: 0;
@@ -41,39 +54,25 @@
 </style>
 </head>
 <body>
-    <div id="aside">
-        <h1>MENU</h1>
-        <ul>
-        	<li>
-        		<div>Address 관리</div>
-        		<ol>
-        			<li><a href="/sakila/address/country.html">Country 관리</a></li>
-        			<li><a href="/sakila/address/city.html">City 관리</a></li>
-        			<li><a href="#">Address 관리</a></li>
-        		</ol>
-        	</li>
-        	<li><a href="">Customer 관리</a></li>
-        	<li><a href="">Business 관리</a></li>
-        	<li><a href="">Inventory 관리</a></li>
-        </ul>
-    </div>
+    <div id="aside"></div>
+    
 	    <div id="section">
-	        	<h1>City 관리</h1>
-		<h2>City 입력</h2>
+	        	<h1>도시 관리</h1>
+		<h2>도시 입력</h2>
 		<div>
 			<div>
 				<div >
-					country 목록 : 
+					나라 목록 : 
 					<select size="10" id="countryList"></select>
 				</div>
 				<div>
 					<table>
 						<tr>
-							<td> country id : </td>
+							<td> 나라번호 : </td>
 							<td><input type="text" id="countryId" readonly="readonly"></td>
 						</tr>
 						<tr>
-							<td> city : </td>
+							<td> 도시 : </td>
 							<td><input type="text" id="city"></td>
 						</tr>
 					</table>
@@ -86,10 +85,10 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<th>city_id</th>
-						<th>city</th>
-						<th>country_id</th>
-						<th>country</th>
+						<th>도시번호</th>
+						<th>도시명</th>
+						<th>나라번호</th>
+						<th>나라명</th>
 					</tr>
 				</thead>
 				<tbody id="list">
@@ -103,6 +102,10 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
+		//다른 html파일 연결.
+		$("#aside").load("/sakila/aside.html");
+		
 		//나라 선택할 수 있게 목록 보여주기
 		$.ajax({
 			url : "/sakila/address/selectCountryListAll",
@@ -125,11 +128,11 @@
 			console.log("country.value :", $("#country").val());
 			//비었는지 확인
 			if($("#city").val() === "" ){
-				alert("city 입력하세요");
+				alert("도시를 입력하세요");
 				return;
 			}
 			if($("#countryId").val() === "" ){
-				alert("countryId 입력하세요");
+				alert("나라번호를 입력하세요");
 				return;
 			}
 			//ajax요청 ,비동기 방식

@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>country</title>
+<title>country - country</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <style>
 	body {
 		padding: 0;
@@ -42,21 +55,20 @@
 	</div>
 	<div id="section">
 		
-		<h1> Country 관리</h1>
-			<h2> country 입력</h2>
-			<div>
-				<div>country : <input type="text" id="country"></div> <!-- 값 하나일땐 id 많을땐 class -->
-				<div><button type="button" id ="addCountry">add country</button></div>
+		<h1>나라</h1>
+			<div class="row">
+				<div>나라명 : <input type="text" id="country"></div> <!-- 값 하나일땐 id 많을땐 class -->
+				<div><button type="button" id ="addCountry">추가</button></div>
 			</div>
 			
-			<h2> country 목록</h2>
+			<h2>국가 목록</h2>
 			<div>
 				<table border="1">
 					<thead>	
 						<tr>
-							<th>country_id</th>
-							<th>country</th>
-							<th>last_update</th>
+							<th>나라번호</th>
+							<th>나라명</th>
+							<th>등록날짜</th>
 					</thead>
 					<tbody id ="list">
 					

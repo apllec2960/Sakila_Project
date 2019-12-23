@@ -19,7 +19,8 @@ public class CustomerDao {
 		PreparedStatement stmt = null;
 		String sql = "SELECT ad.city_id, ad.address, ad.address2, ad.district, ad.postal_code, ad.phone, c.store_id, c.first_name, c.last_name, c.email "
 					+ "FROM customer c INNER JOIN address ad "
-					+ "ON c.address_id = ad.address_id LIMIT 10";
+					+ "ON c.address_id = ad.address_id "
+					+ "ORDER BY c.customer_id LIMIT 10";
 		ResultSet rs = null;
 		try {
 			conn = DBHelper.getConnection();

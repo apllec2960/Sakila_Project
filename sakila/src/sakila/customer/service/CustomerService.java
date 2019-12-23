@@ -14,6 +14,7 @@ public class CustomerService {
 	private AddressDao addressDao;
 	private CustomerDao customerDao;
 	public void insertCustomer(Address address, Customer customer) {
+		System.out.println("insertCustomer - Service");
 		Connection conn = null;
 		
 	try {
@@ -21,7 +22,7 @@ public class CustomerService {
 		conn.setAutoCommit(false);
 		//customer.gtAddress.setAddrss
 		addressDao = new AddressDao();  
-		int addressId = addressDao.insertAddress(conn,address);
+		int addressId = addressDao.insertAddress(address, conn);
 		//System.out.println(addressId);
 		customerDao = new CustomerDao();
 		customer.setAddressId(addressId);
