@@ -4,6 +4,18 @@
 <title>sakila index</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 부트스트랩 적용 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
 	body {
 		padding: 0;
@@ -18,26 +30,13 @@
 		position: relative;
 		overflow-y: auto;
 	}
-	
-	#aside {
-		width: 200px;
-		height: 3000px;
-		position: fixed;
-		background: orange;
-		overflow: hidden;
-		float: left;
-	}
-	
+
 	#section {
 		margin-left: 300px;
 		margin-right: 500px;
 		margin-bottom: 100px;
 		background: white;
 	}
-	   table,th,td{
-	    border: 1px solid #000000;
-
-    }
 </style>
 </head>
 <body>
@@ -48,7 +47,7 @@
 	<div id="section">
 		<h1>INDEX</h1>
 		<h2>sakila database table</h2>
-		<table>
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>테이블명</th>
@@ -57,67 +56,67 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>Country</td>
+					<td>국가</td>
 					<td><span id="countryRow"></span></td>
 				</tr>
 				<tr>
-        			<td>city</td>
+        			<td>도시</td>
         			<td><span id="cityRow"></span></td>
         		</tr>
         		<tr>
-        			<td>address</td>
+        			<td>주소</td>
         			<td><span id="addressRow"></span></td>
         		</tr>
         		<tr>
-        			<td>customer</td>
+        			<td>고객</td>
         			<td><span id="customerRow"></span></td>
         		</tr>
         		<tr>
-        			<td>staff</td>
+        			<td>사원</td>
         			<td><span id="staffRow"></span></td>
         		</tr>
         		<tr>
-        			<td>store</td>
+        			<td>점포</td>
         			<td><span id="storeRow"></span></td>
         		</tr>
         		<tr>
-        			<td>payment</td>
+        			<td>지불</td>
         			<td><span id="payMentRow"></span></td>
         		</tr>
         		<tr>
-        			<td>rental</td>
+        			<td>대여</td>
         			<td><span id="rentalRow"></span></td>
         		</tr>
         		<tr>
-        			<td>category</td>
+        			<td>분야</td>
         			<td><span id="categoryRow"></span></td>
         		</tr>
         		<tr>
-        			<td>filmCategory</td>
+        			<td>영화 카테고리</td>
         			<td><span id="filmCategoryRow"></span></td>
         		</tr>
         		<tr>
-        			<td>film</td>
+        			<td>영화</td>
         			<td><span id="filmRow"></span></td>
         		</tr>
         		<tr>
-        			<td>language</td>
+        			<td>언어</td>
         			<td><span id="languageRow"></span></td>
         		</tr>
         		<tr>
-        			<td>actor</td>
+        			<td>배우</td>
         			<td><span id="actorRow"></span></td>
         		</tr>
         		<tr>
-        			<td>filmActor</td>
+        			<td>영화배우</td>
         			<td><span id="filmActorRow"></span></td>
         		</tr>
         		<tr>
-        			<td>inventory</td>
+        			<td>재고</td>
         			<td><span id="inventoryRow"></span></td>
         		</tr>
         		<tr>
-        			<td>fileText</td>
+        			<td>영화번역</td>
         			<td><span id="filmTextRow"></span></td>
         		</tr>
 			</tbody>

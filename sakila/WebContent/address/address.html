@@ -4,6 +4,17 @@
 <title>sakila - address</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
     body {
         padding: 0;
@@ -17,15 +28,6 @@
         background-size: cover;
         position: relative;
         overflow-y: auto;
-    }
-    
-    #aside {
-        width: 200px;
-        height: 3000px;
-        position: fixed;
-        background: orange;
-        overflow: hidden;
-        float: left;
     }
     
     #section {
@@ -43,8 +45,8 @@
 
     </div>
     <div id="section">
-        <h1>Address</h1>
-        <h2>add address</h2>
+        <h1>주소</h1>
+        <h2>주소 입력</h2>
         <table>
          <tr>
             <td>
@@ -58,31 +60,31 @@
                </div>               
             </td>         
             <td>               
-               coutry_id: <input type="text" id="countryId" readonly="readonly"><hr>
-               city_id: <input type="text" id="cityId" readonly="readonly"><hr>
-               address: <input type="text" id="address" ><hr>
-               address2: <input type="text" id="address2" ><hr>
-               district: <input type="text" id="district" ><hr>
-               postal_code: <input type="text" id="postalCode" ><hr>
-               phone: <input type="text" id="phone" ><hr>
-               <button type="button" id="addAddress"> insert > </button><hr>
+               	 국가 코드: <input type="text" id="countryId" readonly="readonly"><hr>
+		                   도시 코드: <input type="text" id="cityId" readonly="readonly"><hr>
+		                   주소: <input type="text" id="address" ><hr>
+		                   상세주소: <input type="text" id="address2" ><hr>
+		                   도심명: <input type="text" id="district" ><hr>
+			          우편번호: <input type="text" id="postalCode" ><hr>
+			          전화번호: <input type="text" id="phone" ><hr>
+               <button type="button" id="addAddress"> 입력 > </button><hr>
             </td>
          </tr>
       </table>
         
-        <h2>address 목록</h2>		
+        <h2>주소 목록</h2>		
 		<div>
 			<table border="1">
 				<thead>
 					<tr>
-						<th>coutry_id :</th>
-						<th>address:</th>
-						<th>address2 :</th>
-						<th>district :</th>
-						<th>city_id :</th>
-						<th>postal_code :</th>
-						<th>phone :</th>
-						<th>last_update :</th>
+						<th>국가 코드 :</th>
+						<th>주소:</th>
+						<th>상세주소 :</th>
+						<th>도심명 :</th>
+						<th>도시 코드 :</th>
+						<th>우편 번호 :</th>
+						<th>전화번호 :</th>
+						<th>최근 업데이트 :</th>
 					</tr>
 				</thead>
 				<tbody id="list">

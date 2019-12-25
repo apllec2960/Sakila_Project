@@ -22,6 +22,10 @@ public class Country {	// dto, vo, domain 이라고 불림.
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
+	@Override
+	public String toString() {
+		return "Country [countryId=" + countryId + ", country=" + country + ", lastUpdate=" + lastUpdate + "]";
+	}
 	
 	
 }

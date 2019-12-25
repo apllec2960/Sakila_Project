@@ -56,6 +56,7 @@ public class CustomerDao {
 	
 	//customer테이블의 데이터를 입력하는 메소드
 	public void insertCustomer(Connection conn, Customer customer) throws Exception {
+		System.out.println("customer"+customer.toString());
 		PreparedStatement stmt = null;
 		String sql = "INSERT INTO customer("
 				+ "store_id, first_name, last_name, email, address_id, active, create_date, last_update)"

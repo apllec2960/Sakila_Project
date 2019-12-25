@@ -13,6 +13,8 @@ import sakila.db.DBHelper;
 public class CustomerService {
 	private AddressDao addressDao;
 	private CustomerDao customerDao;
+	
+	//고객정보 입력
 	public void insertCustomer(Address address, Customer customer) {
 		System.out.println("insertCustomer - Service");
 		Connection conn = null;
@@ -23,9 +25,9 @@ public class CustomerService {
 		//customer.gtAddress.setAddrss
 		addressDao = new AddressDao();  
 		int addressId = addressDao.insertAddress(address, conn);
-		//System.out.println(addressId);
-		customerDao = new CustomerDao();
+		System.out.println(address.toString());
 		customer.setAddressId(addressId);
+		customerDao = new CustomerDao();
 		customerDao.insertCustomer(conn,customer);
 		conn.commit();
 	}catch(Exception e) {

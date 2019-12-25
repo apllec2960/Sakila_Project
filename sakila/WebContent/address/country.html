@@ -31,16 +31,7 @@
 		position: relative;
 		overflow-y: auto;
 	}
-	
-	#aside {
-		width: 200px;
-		height: 3000px;
-		position: fixed;
-		background: orange;
-		overflow: hidden;
-		float: left;
-	}
-	
+		
 	#section {
 		margin-left: 300px;
 		margin-right: 500px;
@@ -55,9 +46,9 @@
 	</div>
 	<div id="section">
 		
-		<h1>나라</h1>
+		<h1>국가</h1>
 			<div class="row">
-				<div>나라명 : <input type="text" id="country"></div> <!-- 값 하나일땐 id 많을땐 class -->
+				<div>국가이름 : <input type="text" id="country"></div> <!-- 값 하나일땐 id 많을땐 class -->
 				<div><button type="button" id ="addCountry">추가</button></div>
 			</div>
 			
@@ -66,8 +57,8 @@
 				<table border="1">
 					<thead>	
 						<tr>
-							<th>나라번호</th>
-							<th>나라명</th>
+							<th>국가코드</th>
+							<th>국가이름</th>
 							<th>등록날짜</th>
 					</thead>
 					<tbody id ="list">

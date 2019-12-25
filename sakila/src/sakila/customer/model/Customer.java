@@ -83,6 +83,12 @@ public class Customer {
 	public void setStore(Store store) {
 		this.store = store;
 	}
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", store=" + store + ", firstName=" + firstName + ", storeId="
+				+ storeId + ", lastName=" + lastName + ", email=" + email + ", addressId=" + addressId + ", active="
+				+ active + ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", address=" + address + "]";
+	}
 	
 	
 }
