@@ -20,15 +20,16 @@ public class AddressDao {
 	public int insertAddress( Address address, Connection conn) {
 		System.out.println("insertAddressDao");
 		System.out.println(address.toString());
+		int addressId =0;
+		int row =0;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = "INSERT INTO address(address,address2,city_id,district,postal_code,phone, last_update) "
 					+ "VALUES(?,?,?,?,?,?, now())";
 		System.out.println(address.getCity().getCityId());
 		try {
-			
 			conn = DBHelper.getConnection();
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,address.getAddress());
 			stmt.setString(2,address.getAddress2());
 			stmt.setInt(3,address.getCity().getCityId());
@@ -36,14 +37,20 @@ public class AddressDao {
 			stmt.setString(5,address.getPostalCode());
 			stmt.setString(6,address.getPhone());
 			
-			stmt.executeUpdate();
+			row = stmt.executeUpdate();
+			System.out.println("row"+row);
+			rs = stmt.getGeneratedKeys();
 			
+			if(rs.next()) {
+				addressId = rs.getInt(1);
+				System.out.println("addressDao addressId"+addressId);
+			}
 		}	catch(Exception e) {
 			e.printStackTrace();
 		}	finally {
 			DBHelper.close(null, stmt, conn);
 		}
-		return 0;
+		return addressId;
 	}
 	
 	
