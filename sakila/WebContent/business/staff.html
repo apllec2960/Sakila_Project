@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>sakila - staff </title>
+
+<!-- 스타일시트 css 파일 import -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		position: relative;
+		overflow-y: auto;
+	}
+
+	#section {
+		margin-left: 300px;
+		margin-right: 500px;
+		margin-bottom: 100px;
+		background: white;
+	}
+</style>
+</head>
+<body>
+	<!-- 메뉴-->
+	<div id="aside">
+			<!-- aside.html을 include -->
+	</div>
+	<!-- 내용 -->
+	<div id="section">
+		<h1>STAFF</h1>
+		
+		<div>
+			<table class="table" id="selectStaff"></table>
+		</div>
+	</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>$("#aside").load("/sakila/aside.html");</script>
+<script>
+
+	$.ajax({
+		url : "/sakila/business/selectStaffList",
+		method :"get",
+		success : function(json){
+			console.log(json);
+			let staffList = "<thead><tr><th>점포번호</th><th>주소</th><th>스태프</th><th>업데이트</th></tr></thead>";
+			$(json).each(function(index, item){
+			console.log(index);
+			staffList += "<tbody><tr><td>"+item.store.storeId+"</td>";
+			staffList +="<td>"+item.address.address+"</td>";
+			staffList +="<td>"+item.staffName+"</td>";
+			staffList +="<td>"+item.lastUpdate+"</td>";
+			staffList +="</tr></tbody>";
+			})
+			$("#selectStaff").append(staffList);
+		}
+	})
+
+
+</script>
+</html>

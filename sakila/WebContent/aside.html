@@ -21,19 +21,37 @@
 
 </head>
 <body>
-	<h1>MENU</h1>
+	<h1 style="height : 100px">SAKLIA</h1>
 		<hr>
-		<ul>
-			<li><a href="/sakila/index.html">홈</a></li>
-		</ul>
-		<hr>
-		<ul>
-  			<li><a href="/sakila/address/country.html">국가 관리</a></li>
-  			<li><a href="/sakila/address/city.html">도시 관리</a></li>
-  			<li><a href="/sakila/address/address.html">주소 관리</a></li>
-	       	<li><a href="/sakila/Customer.html">고객 관리</a></li>
-	       	<li><a href="">사업 관리</a></li>
-	       	<li><a href="">재고 관리</a></li>
-		</ul>
+	
+<ul class="list-unstyled components mb-5">
+      <li class="active">
+         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Address</a>
+         <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li><a href="/sakila/address/country.html">국가 관리</a></li>
+            <li><a href="/sakila/address/address.html">주소 관리</a></li>
+            <li><a href="/sakila/address/city.html">도시 관리</a></li>
+         </ul>
+      </li>
+      
+      
+      <li>
+         <a href="#pageSecondMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customer</a>
+         <ul class="collapse list-unstyled" id="pageSecondMenu">
+            <li><a href="/sakila/Customer.html">고객 관리</a></li>
+         </ul>
+      </li>
+      
+      <li>
+         <a href="#pageThirdMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Business</a>
+         <ul class="collapse list-unstyled" id="pageThirdMenu">
+            <li><a href="/sakila/business/store.html">점포 관리</a></li>
+            <li><a href="/sakila/business/staff.html">매니저 관리</a></li>
+            <li><a href="/sakila/business/staff.html">사업 관리</a></li>
+            <li><a href="/sakila/business/staff.html">재고 관리</a></li>
+         </ul>
+      </li>
+   </ul>
 </body>
 </html>
+
