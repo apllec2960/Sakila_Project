@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>sakila - rental </title>
+
+<!-- 스타일시트 css 파일 import -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	body {
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		position: relative;
+		overflow-y: auto;
+	}
+
+	#section {
+		margin-left: 300px;
+		margin-right: 500px;
+		margin-bottom: 100px;
+		background: white;
+	}
+</style>
+</head>
+<body>
+	<!-- 메뉴-->
+	<div id="aside">
+			<!-- aside.html을 include -->
+	</div>
+	<!-- 내용 -->
+	<div id="section" align="center">
+		<h1>Rental</h1>
+		
+		<div>
+			<table class="table" id="selectRental"></table>
+		</div>
+	</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>$("#aside").load("/sakila/aside.html");</script>
+<script>
+	let currentPage = 1;
+	let rowPerPage =10;
+
+	$.ajax({
+		url : "/sakila/business/selectRentalList",
+		method :"get",
+		data : {"currentPage": currentPage,
+				"rowPerPage": rowPerPage},
+		success : function(json){
+			console.log(json);
+			let rentalList = "<thead><tr><th>대여번호</th><th>제목</th><th>고객명</th>"
+				rentalList += "<th>스태프</th><th>대여날짜</th><th>반납날짜</th></tr></thead>";
+			
+			$(json).each(function(index, item){
+				rentalList +="<tbody><tr><td>"+item.rentalId
+				rentalList +="</td><td>"+item.film.title
+				rentalList +="</td><td>"+item.customerName
+				rentalList +="</td><td>"+item.staffName
+				rentalList +="</td><td>"+item.rentalDate
+				rentalList +="</td><td>"+item.returnDate
+				rentalList +="</td></tr></tbody>"
+				
+			})
+			$("#selectRental").append(rentalList);
+		}
+	})
+
+
+</script>
+</html>
