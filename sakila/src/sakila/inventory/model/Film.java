@@ -3,16 +3,33 @@ package sakila.inventory.model;
 public class Film {
 	private int filmId;
 	private String title;
-	private String decription;
+	private String description;
 	private String year;
-	private String languageId;
+	private Language language;
 	private String originalLanguage;
-	private String rentalDuration;
+	private int rentalDuration;
 	private double rentalRate;
 	private int length;
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private String releaseYear;
+	private String lastUpdate;
+	
+	
+	
+	public String getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(String lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	public String getReleaseYear() {
+		return releaseYear;
+	}
+	public void setReleaseYear(String releaseYear) {
+		this.releaseYear = releaseYear;
+	}
 	public int getFilmId() {
 		return filmId;
 	}
@@ -25,11 +42,11 @@ public class Film {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String decription) {
+		this.description = decription;
 	}
 	public String getYear() {
 		return year;
@@ -37,11 +54,11 @@ public class Film {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	public String getLanguageId() {
-		return languageId;
+	public Language getLanguage() {
+		return language;
 	}
-	public void setLanguageId(String languageId) {
-		this.languageId = languageId;
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 	public String getOriginalLanguage() {
 		return originalLanguage;
@@ -49,10 +66,10 @@ public class Film {
 	public void setOriginalLanguage(String originalLanguage) {
 		this.originalLanguage = originalLanguage;
 	}
-	public String getRentalDuration() {
+	public int getRentalDuration() {
 		return rentalDuration;
 	}
-	public void setRentalDuration(String rentalDuration) {
+	public void setRentalDuration(int rentalDuration) {
 		this.rentalDuration = rentalDuration;
 	}
 	public double getRentalRate() {
@@ -85,13 +102,14 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
 	@Override
 	public String toString() {
-		return "Film [filmId=" + filmId + ", title=" + title + ", decription=" + decription + ", year=" + year
-				+ ", languageId=" + languageId + ", originalLanguage=" + originalLanguage + ", rentalDuration="
+		return "Film [filmId=" + filmId + ", title=" + title + ", decription=" + description + ", year=" + year
+				+ ", language=" + language + ", originalLanguage=" + originalLanguage + ", rentalDuration="
 				+ rentalDuration + ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost="
-				+ replacementCost + ", rating=" + rating + ", specialFeatures=" + specialFeatures + "]";
+				+ replacementCost + ", rating=" + rating + ", specialFeatures=" + specialFeatures + ", releaseYear="
+				+ releaseYear + ", lastUpdate=" + lastUpdate + "]";
 	}
-	
-	
+		
 }

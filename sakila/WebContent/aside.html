@@ -8,23 +8,28 @@
 		width: 200px;
 		height: 3000px;
 		position: fixed;
-		background: linear-gradient(90deg, rgb(148, 204, 255), rgb(127, 191, 255));
+		background: linear-gradient(90deg, rgb(78, 87, 95), rgb(42, 48, 54));
 		overflow: hidden;
 		float: left;
 		}
 		
 	a{
-		color: black;
-		font-size: large;
+		color: white;
+		font-size: x-large;
 	}
+	
+	.b{
+		margin-left: 20px;
+		margin-bottom: 50px;
+	}
+
 </style>
 
 </head>
 <body>
-	<h1 style="height : 100px"><a href="/sakila/index.html">SAKLIA</a></h1>
-		<hr>
+	<h1 class="b" style="height : 50px"><a href="/sakila/index.html">SAKLIA</a></h1>
 	
-	<ul class="list-unstyled components mb-5">
+	<ul class="list-unstyled components b">
       <li class="active">
          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Address</a>
          <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -33,22 +38,29 @@
             <li><a href="/sakila/address/city.html">도시 관리</a></li>
          </ul>
       </li>
-      
-      
+      <br>
       <li>
-         <a href="#pageSecondMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customer</a>
-         <ul class="collapse list-unstyled" id="pageSecondMenu">
+         <a href="#pageTwo" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customer</a>
+         <ul class="collapse list-unstyled" id="pageTwo">
             <li><a href="/sakila/customer/customer.html">고객 관리</a></li>
          </ul>
       </li>
-      
+      <br>
       <li>
-         <a href="#pageThirdMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Business</a>
-         <ul class="collapse list-unstyled" id="pageThirdMenu">
+         <a href="#pageThree" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Business</a>
+         <ul class="collapse list-unstyled" id="pageThree">
             <li><a href="/sakila/business/store.html">점포 관리</a></li>
+            <li><a href="/sakila/business/film.html">영화 관리</a></li>
             <li><a href="/sakila/business/staff.html">매니저 관리</a></li>
             <li><a href="/sakila/business/rental.html">대여 관리</a></li>
             <li><a href="/sakila/business/staff.html">재고 관리</a></li>
+         </ul>
+      </li>
+      <br>
+       <li>
+         <a href="#pageFour" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Inventory</a>
+         <ul class="collapse list-unstyled" id="pageFour">
+            <li><a href="/sakila/inventory/film.html">영화 관리</a></li>
          </ul>
       </li>
    </ul>
