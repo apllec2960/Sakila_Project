@@ -1,7 +1,6 @@
-package skila.business.controller;
+package sakila.business.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,28 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import sakila.business.model.Staff;
 import sakila.business.model.StaffDao;
 
 /**
- * Servlet implementation class selectStaffList
+ * Servlet implementation class selectStaffCount
  */
-@WebServlet("/business/selectStaffList")
-public class selectStaffList extends HttpServlet {
+@WebServlet("/business/selectStaffCount")
+public class selectStaffCount extends HttpServlet {
 	private StaffDao staffDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("selectStaffList Servlet 실행 ");
-		response.setContentType("application/json; charset = utf-8"); 
+		response.setContentType("application/json;charset=utf-8");
+		System.out.println("selectStaffCount Servlet");
 		
-		staffDao = new StaffDao();
-		List<Staff> list = staffDao.selectStaffList();
-		System.out.println(list.toString());
+		//스테프 수 출력.
+		int count = staffDao.selectStaffCount();
+		System.out.println("count"+ count);
 		
-		//gson 선언
 		Gson gson = new Gson();
-		String jsonStr = gson.toJson(list);
+		String jsonStr = gson.toJson(count);
+		System.out.println(jsonStr);
 		
 		response.getWriter().write(jsonStr);
-		}
+		
+	}
+
 
 }

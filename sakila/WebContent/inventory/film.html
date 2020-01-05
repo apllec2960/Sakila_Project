@@ -62,14 +62,12 @@
 		
 		<table class="table" id="film"></table>
 		<div>
-			<button type="button" id="nextBtn">다음</button>
 			<button type="button" id="preBtn">이전</button>
+			<button type="button" id="nextBtn">다음</button>
 		</div>
 	</div>
 </body>
-	<!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
+<script>
 		//사이드바 연결.
 		$("#aside").load("/sakila/aside.html");
 		
@@ -86,7 +84,6 @@
 				let filmList = "<thead><tr><th>영화번호</th><th>제목</th><th>소개</th><th>상영연도</th><th>언어</th><th>대여기간</th>"
 					filmList += "<th>대여비율</th><th>상영시간</th><th>대여비용</th><th>등급</th><th>최근 업데이트</th></tr></thead>"
 		 	 	$(json).each(function(index, item){
-					console.log(item,"item")
 					filmList += "<tbody><tr>"
 					filmList += "<td>"+item.filmId+"</td><td>"+item.title+"</td>"
 					filmList += "<td>"+item.description+"</td><td>"+item.releaseYear+"</td>"
@@ -136,7 +133,6 @@
 					let filmList = "<thead><tr><th>영화번호</th><th>제목</th><th>소개</th><th>상영연도</th><th>언어</th><th>대여기간</th>"
 						filmList += "<th>대여비율</th><th>상영시간</th><th>대여비용</th><th>등급</th><th>최근 업데이트</th></tr></thead>"
 			 	 	$(json).each(function(index, item){
-						console.log(item,"item")
 						filmList += "<tbody><tr>"
 						filmList += "<td>"+item.filmId+"</td><td>"+item.title+"</td>"
 						filmList += "<td>"+item.description+"</td><td>"+item.releaseYear+"</td>"
@@ -153,27 +149,25 @@
 			
 			//이전 페이지 이동
 			$("#preBtn").click(function(){
-			$.ajax({
+				if(currentPage ===1){
+					alert("1페이지 입니다");
+					return;
+				}
+				
+				currentPage -= 1;	
+				console.log("이전",currentPage);
+				
+				$.ajax({
 				url : "/sakila/inventory/selectFilmList",
 				method : "get",
 				data : {"currentPage": currentPage},
 				success : function(json){
-					console.log(json);
-					
-					if(currentPage ===1){
-						alert("1페이지 입니다");
-						return;
-					}
-					
-					currentPage -= 1;	
-					console.log(currentPage);
-					
+					console.log(json);					
 					$("#film").empty();
 					
 					let filmList = "<thead><tr><th>영화번호</th><th>제목</th><th>소개</th><th>상영연도</th><th>언어</th><th>대여기간</th>"
 						filmList += "<th>대여비율</th><th>상영시간</th><th>대여비용</th><th>등급</th><th>최근 업데이트</th></tr></thead>"
 			 	 	$(json).each(function(index, item){
-						console.log(item,"item")
 						filmList += "<tbody><tr>"
 						filmList += "<td>"+item.filmId+"</td><td>"+item.title+"</td>"
 						filmList += "<td>"+item.description+"</td><td>"+item.releaseYear+"</td>"

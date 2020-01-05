@@ -23,24 +23,18 @@ public class selectRentalList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	response.setContentType("application/json; charset = utf-8");
 	System.out.println("selectRentalList Servlet 실행");
+	
 	int currentPage = 1;
-	int rowPerPage = 10;
-	int totalRow = 0;
-	int lastPage = 0;
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	System.out.println("currentPage"+currentPage);
 	
 	rentalDao = new RentalDao();
 	
-	List<Rental> list = rentalDao.selectRentalList(currentPage, rowPerPage);
+	List<Rental> list = rentalDao.selectRentalList(currentPage);
 	System.out.println("list"+list);
-	
-	totalRow = rentalDao.RentalCount();
-	if(totalRow % rowPerPage ==0) {
-		totalRow = (totalRow/rowPerPage);
-	}else {
-		totalRow = (totalRow/rowPerPage)+1;
-	}
-	System.out.println("totalRow : "+ totalRow);
-	
+		
 	Gson gson = new Gson();
 	String jsonStr = gson.toJson(list);
 	System.out.println(jsonStr.toString());

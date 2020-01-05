@@ -1,4 +1,4 @@
-package sakila.inventory.controller;
+package sakila.business.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,34 +11,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import sakila.inventory.model.Film;
-import sakila.inventory.model.FilmDao;
+import sakila.business.model.Staff;
+import sakila.business.model.StaffDao;
 
 /**
- * Servlet implementation class selectFilmList
+ * Servlet implementation class selectStaffList
  */
-@WebServlet("/inventory/selectFilmList")
-public class selectFilmList extends HttpServlet {
-	private FilmDao filmDao;
+@WebServlet("/business/selectStaffList")
+public class selectStaffList extends HttpServlet {
+	private StaffDao staffDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("selectFilmList Servlet");
-		response.setContentType("application/json");
+		System.out.println("selectStaffList Servlet 실행 ");
+		response.setContentType("application/json; charset = utf-8"); 
 		
-		System.out.println("currentPage : " + request.getParameter("currentPage"));
-		int currentPage = 1;
+		int currentPage =1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		filmDao = new FilmDao();
-
-		List<Film> list = filmDao.selectFilmList(currentPage);
-		System.out.println("list"+ list.toString());
+		staffDao = new StaffDao();
+		List<Staff> list = staffDao.selectStaffList(currentPage);
+		System.out.println(list.toString());
 		
+		//gson 선언
 		Gson gson = new Gson();
 		String jsonStr = gson.toJson(list);
 		
 		response.getWriter().write(jsonStr);
-	}
+		}
 
 }

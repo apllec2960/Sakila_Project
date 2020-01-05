@@ -55,6 +55,10 @@
 		<div>
 			<table class="table" id="selectRental"></table>
 		</div>
+		<div>
+			<button type="button" id="preBtn">이전</button>
+			<button type="button" id="nextBtn">다음</button>
+		</div>
 	</div>
 
 </body>
@@ -62,13 +66,12 @@
 <script>$("#aside").load("/sakila/aside.html");</script>
 <script>
 	let currentPage = 1;
-	let rowPerPage =10;
-
+	let count = 0;
+	
 	$.ajax({
 		url : "/sakila/business/selectRentalList",
 		method :"get",
-		data : {"currentPage": currentPage,
-				"rowPerPage": rowPerPage},
+		data : {"currentPage": currentPage},
 		success : function(json){
 			console.log(json);
 			let rentalList = "<thead><tr><th>대여번호</th><th>제목</th><th>고객명</th>"
@@ -87,7 +90,87 @@
 			$("#selectRental").append(rentalList);
 		}
 	})
-
-
+	
+	$("#nextBtn").click(function(){
+			//총 카운트 수 출력
+			$.ajax({
+				url : "/sakila/business/selectRentalCount",
+				method : "get",
+				success : function(json){
+					count = Number(json);	
+					console.log(json,"json");
+				}
+			})
+			//이 사이즈로 마지막페이지
+			let lastPage = Math.ceil(count/10);
+			console.log("lastPage : ", lastPage );
+			if(currentPage === lastPage){
+				alert("마지막 페이지 입니다");
+				return;
+			}
+			
+			currentPage =currentPage + 1;
+			console.log("currentPage  :  ", currentPage);
+			
+			$("#film").empty();
+			
+			//다음 페이지 이동
+			$.ajax({
+				url : "/sakila/business/selectRentalList",
+				method : "get",
+				data : {"currentPage": currentPage},
+				success : function(json){
+					console.log(json);
+					$("#selectRental").empty();
+					let rentalList = "<thead><tr><th>대여번호</th><th>제목</th><th>고객명</th>"
+						rentalList += "<th>스태프</th><th>대여날짜</th><th>반납날짜</th></tr></thead>";
+					$(json).each(function(index, item){
+						rentalList +="<tbody><tr><td>"+item.rentalId
+						rentalList +="</td><td>"+item.film.title
+						rentalList +="</td><td>"+item.customerName
+						rentalList +="</td><td>"+item.staffName
+						rentalList +="</td><td>"+item.rentalDate
+						rentalList +="</td><td>"+item.returnDate
+						rentalList +="</td></tr></tbody>"
+			 	 	})  
+			 	 	$("#selectRental").append(rentalList);
+				}
+			})			
+		})
+		
+		//이전 페이지 이동
+		$("#preBtn").click(function(){
+			if(currentPage ===1){
+				alert("1페이지 입니다");
+				return;
+			}
+			
+			currentPage -= 1;	
+			console.log("이전",currentPage);
+			
+			$.ajax({
+			url : "/sakila/business/selectRentalList",
+			method : "get",
+			data : {"currentPage": currentPage},
+			success : function(json){
+				console.log(json);					
+				$("#selectRental").empty();
+				let rentalList = "<thead><tr><th>대여번호</th><th>제목</th><th>고객명</th>"
+					rentalList += "<th>스태프</th><th>대여날짜</th><th>반납날짜</th></tr></thead>";
+				$(json).each(function(index, item){
+					rentalList +="<tbody><tr><td>"+item.rentalId
+					rentalList +="</td><td>"+item.film.title
+					rentalList +="</td><td>"+item.customerName
+					rentalList +="</td><td>"+item.staffName
+					rentalList +="</td><td>"+item.rentalDate
+					rentalList +="</td><td>"+item.returnDate
+					rentalList +="</td></tr></tbody>"
+					
+		 	 	})  
+		 	 	
+		 	 	$("#selectRental").append(rentalList);
+				}
+			})
+		})
 </script>
 </html>

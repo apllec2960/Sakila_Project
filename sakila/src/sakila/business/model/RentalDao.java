@@ -34,10 +34,9 @@ public class RentalDao {
 	}
 	
 	//렌탈리스트 출력 
-	public List<Rental> selectRentalList(int currentPage, int rowPerPage){
+	public List<Rental> selectRentalList(int currentPage){
 		System.out.println("selectRntalList Dao");
 		List<Rental> list = new ArrayList<Rental>();
-		int beginRow = 0;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -46,10 +45,15 @@ public class RentalDao {
 					"ON r.customer_id = c.customer_id AND r.staff_id = s.staff_id AND r.inventory_id = i.inventory_id AND f.film_id = i.film_id\r\n" + 
 					"ORDER BY rental_id asc\r\n" + 
 					"LIMIT ?, ?";
+		int rowPerPage =10;
+		int beginRow = 0;
+			beginRow = (currentPage -1)*rowPerPage;
+		
+		
 		try {
 			conn = DBHelper.getConnection();
 			stmt = conn.prepareStatement(sql);
-			beginRow = (currentPage -1)*rowPerPage;
+			
 			System.out.println("beginRow : "+ beginRow);
 			stmt.setInt(1, beginRow);
 			stmt.setInt(2, rowPerPage);
