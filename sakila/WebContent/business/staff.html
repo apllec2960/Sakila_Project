@@ -47,7 +47,7 @@
 	<!-- 내용 -->
 	<div id="section">
 		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  	<a class="navbar-brand" href="#">SAKILA</a>		
+		  	<a class="navbar-brand" href="#">SAKILA/Staff ·Store</a>		
 		</nav>
 		<h1>STAFF</h1>
 		
@@ -55,7 +55,7 @@
 			<table class="table" id="selectStaff"></table>
 		</div>
 		<div>
-			<button type="button" id="prevBtn">이전</button>
+			<button type="button" id="preBtn">이전</button>
 			<button type="button" id="nextBtn">다음</button>
 		</div>
 	</div>
@@ -89,7 +89,7 @@
 		}
 	})
 	
-	$("#nextBtn").click(function()		
+	$("#nextBtn").click(function(){
 		//전체 수 출력
 		$.ajax({
 			url : "/business/selectStaffCount",
@@ -126,7 +126,7 @@
 				console.log(json);
 				let staffList = "<thead><tr><th>점포번호</th><th>주소</th><th>스태프</th><th>업데이트</th></tr></thead>";
 				$(json).each(function(index, item){
-				console.log(index);
+
 				staffList += "<tbody><tr><td>"+item.store.storeId+"</td>";
 				staffList +="<td>"+item.address.address+"</td>";
 				staffList +="<td>"+item.staffName+"</td>";
@@ -141,7 +141,35 @@
 		
 		
 	})
-		
+	
+	$("#preBtn").click(function(){
+			if(currentPage ===1){
+				alert("1페이지 입니다");
+				return;
+			}
+			
+			currentPage -= 1;	
+			console.log("이전",currentPage);
+			
+			$.ajax({
+			url : "/sakila/business/selectStaffList",
+			method : "get",
+			data : {"currentPage": currentPage},
+			success : function(json){
+				console.log(json);					
+				$("#selectStaff").empty();
+				let staffList = "<thead><tr><th>점포번호</th><th>주소</th><th>스태프</th><th>업데이트</th></tr></thead>";
+				$(json).each(function(index, item){
+					staffList += "<tbody><tr><td>"+item.store.storeId+"</td>";
+					staffList +="<td>"+item.address.address+"</td>";
+					staffList +="<td>"+item.staffName+"</td>";
+					staffList +="<td>"+item.lastUpdate+"</td>";
+					staffList +="</tr></tbody>";
+					})
+					$("#selectStaff").append(staffList);
+				}
+			})
+	})
 
 </script>
 </html>

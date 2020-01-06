@@ -46,48 +46,98 @@
     </div>
     <div id="section">
     	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  	<a class="navbar-brand" href="#">SAKILA</a>		
+		  	<a class="navbar-brand" href="#">SAKILA/Address</a>		
 		</nav>
-        <h1>주소</h1>
-        <h2>주소 입력</h2>
-        <table>
+        <span style="font-size: xx-large;; font-weight: bold;">주소</span>
+        <span style="font-size: medium;">주소입력</span>
+        
+        <hr>
+   <!--      <table>
          <tr>
             <td>
-               <!-- 국가 선택 -->
+               국가 선택
                <div>
                   <select size="10" id="countryList">
                   </select>
-               <!-- selecting city -->
+               selecting city
                   <select size="10" id="cityList">
                   </select>
                </div>               
             </td>         
             <td>               
-               	 국가 코드: <input type="text" id="countryId" readonly="readonly"><hr>
-		                   도시 코드: <input type="text" id="cityId" readonly="readonly"><hr>
-		                   주소: <input type="text" id="address" ><hr>
-		                   상세주소: <input type="text" id="address2" ><hr>
-		                   도심명: <input type="text" id="district" ><hr>
+               	   국가 코드: <input type="text" id="countryId" readonly="readonly"><hr>
+		                 도시 코드: <input type="text" id="cityId" readonly="readonly"><hr>
+		                 주소: <input type="text" id="address" ><hr>
+		                 상세주소: <input type="text" id="address2" ><hr>
+		                 도심명: <input type="text" id="district" ><hr>
 			          우편번호: <input type="text" id="postalCode" ><hr>
-			          전화번호: <input type="text" id="phone" ><hr>
+			          전화번호: <input type="text" id="phone" >
                <button type="button" id="addAddress"> 입력 > </button><hr>
             </td>
          </tr>
-      </table>
+      </table> -->
         
+        <div class="row">
+        	<div class="col-sm-6">
+        		<!-- 국가 선택 -->
+               <div>
+                  <select size="10" id="countryList">
+                  </select>
+                <br>
+               <!-- selecting city -->
+                  <select size="10" style="width: 308px;height: 200px "id="cityList">
+                  </select>
+               </div> 
+        	</div>
+        	<div class="col-sm-6">
+        		<div class="form-group">
+			      	<label for="usr">국가 코드</label>
+			      	<input type="text" id="countryId" readonly="readonly">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">도시 코드</label>
+			      	<input type="text" id="cityId" readonly="readonly">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">주소</label>
+			      	<input type="text" id="address">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">상세주소</label>
+			      	<input type="text" id="address2">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">도시명</label>
+			      	<input type="text" id="district">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">우편번호</label>
+			      	<input type="text" id="postalCode">
+			    </div>
+        		<div class="form-group">
+			      	<label for="usr">전화번호</label>
+			      	<input type="text" id="phone">
+			    </div>
+        		<div class="form-group">
+			      	<button type="button" id="addAddress">입력</button>
+			    </div>
+			    
+        	</div>
+        </div>
+        <hr>
         <h2>주소 목록</h2>		
 		<div>
-			<table border="1">
-				<thead>
+			<table class="table table-hover table-bordered">
+				<thead class="thead-dark">
 					<tr>
-						<th>국가 코드 :</th>
-						<th>주소:</th>
-						<th>상세주소 :</th>
-						<th>도심명 :</th>
-						<th>도시 코드 :</th>
-						<th>우편 번호 :</th>
-						<th>전화번호 :</th>
-						<th>최근 업데이트 :</th>
+						<th>국가 코드</th>
+						<th>주소</th>
+						<th>상세주소</th>
+						<th>도시명</th>
+						<th>도시 코드</th>
+						<th>우편 번호</th>
+						<th>전화번호</th>
+						<th>최근 업데이트</th>
 					</tr>
 				</thead>
 				<tbody id="list">

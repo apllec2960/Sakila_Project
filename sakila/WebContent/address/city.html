@@ -49,45 +49,46 @@
     
 	    <div id="section">
 	    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		  	<a class="navbar-brand" href="#">SAKILA</a>		
+		  	<a class="navbar-brand" href="#">SAKILA/City</a>		
 		</nav>
-	    <h1>도시 관리</h1>
-		<h2>도시 입력</h2>
+	    <span style="font-size: xx-large;font-weight: bold;">도시관리</span>
+	    <span style="font-size: medium;">도시입력</span>
+	    <hr>
 		<div>
-			<div>
-				<div >
-					나라 목록 : 
+			<div class="row">
+				<div class="col-sm-6">
+					나라 목록 : <br>
 					<select size="10" id="countryList"></select>
 				</div>
-				<div>
-					<table>
-						<tr>
-							<td> 나라번호 : </td>
-							<td><input type="text" id="countryId" readonly="readonly"></td>
-						</tr>
-						<tr>
-							<td> 도시 : </td>
-							<td><input type="text" id="city"></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div><button type="button" id="addCity">입력</button></div>		
+				<div class="col-sm-6">
+					<div class="form-group">
+					  	<label for="usr">국가코드 :</label>
+					  	<input type="text" id="countryId" readonly="readonly">
+					</div>
+					<div class="form-group">
+					 	<label for="pwd"> 도시 :</label>
+					  	<input type="text" id="city">
+					</div>
+					<div>
+						<button type="button" id="addCity">입력</button>
+					</div>
+				</div>	
+			</div>	
 		</div>
-		<h2>City 목록</h2>		
+		
+		<hr>
+		<span style="font-size: xx-large;font-weight: bold;">도시목록</span>		
 		<div>
-			<table border="1">
-				<thead>
+			<table class="table table-hover table-bordered">
+				<thead class="thead-dark">
 					<tr>
-						<th>도시번호</th>
+						<th>도시코그</th>
 						<th>도시명</th>
-						<th>나라번호</th>
-						<th>나라명</th>
+						<th>국가코드</th>
+						<th>국가명</th>
 					</tr>
 				</thead>
-				<tbody id="list">
-
-				</tbody>
+				<tbody id="list"></tbody>
 			</table>
 		</div>
 		<button type="button" id="preBtn">이전</button>
