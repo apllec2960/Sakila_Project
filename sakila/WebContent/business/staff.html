@@ -51,6 +51,36 @@
 		</nav>
 		<h1>STAFF</h1>
 		
+		<div class="row">
+			<!-- 사원 정보 입력 -->
+			<div class="col-sm-4">
+				<div class="form-group">
+			      <label for="storeId">매장</label>
+			      <select class="form-control" id="storeId" name="storeId"></select>
+			    </div>
+			    <div class="form-group">
+			      <label for="addressId">매장주소</label>
+			      <select class="form-control" id="addressId" name="addressId"></select>
+			    </div>
+			    <div class="form-group">
+			      <label >이름</label>
+			      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="성">
+			      <input type="text" class="form-control" id="lastNmae" name="lastNmae" placeholder="이름">
+			    </div>
+			     <div class="form-group">
+			      <label for="email">이메일</label>
+			      <input type="text" class="form-control" id="email" name="email">
+			    </div>
+			    <div class="form-group">
+			      <label for="userName">닉네임</label>
+			      <input type="text" class="form-control" id="userName" name="userName">
+			    </div>
+			    <button type="submit" class="form-control btn btn-primary" id="addStaff">사원추가</button>
+			</div>
+		</div>
+		
+		<hr>
+		<h2>매장 및 사원조회</h2>
 		<div>
 			<table class="table" id="selectStaff"></table>
 		</div>
@@ -69,6 +99,7 @@
 	let count = 0;
 	let rowPerPage =10;
 	let lastPage =0;
+	
 	//사원 리스트 출력.
 	$.ajax({
 		url : "/sakila/business/selectStaffList",
@@ -76,23 +107,42 @@
 		data :{"currentPage": currentPage},
 		success : function(json){
 			console.log(json);
-			let staffList = "<thead><tr><th>점포번호</th><th>주소</th><th>스태프</th><th>업데이트</th></tr></thead>";
+			let storeList
+			let staffList = "<thead><tr><th>매장번호</th><th>매장주소</th><th>스태프</th><th>이메일</th><th>업데이트</th></tr></thead>";
 			$(json).each(function(index, item){
-			console.log(index);
 			staffList += "<tbody><tr><td>"+item.store.storeId+"</td>";
 			staffList +="<td>"+item.address.address+"</td>";
 			staffList +="<td>"+item.staffName+"</td>";
+			staffList +="<td>"+item.email+"</td>";
 			staffList +="<td>"+item.lastUpdate+"</td>";
 			staffList +="</tr></tbody>";
+			
+			//매장 선택지 출력
+			storeList = "<option value='";
+			storeList += item.store.storeId
+			storeList += "'>"
+			storeList += item.store.storeId
+			storeList += "</option>"
+			$("#storeId").append(storeList);
+			
+			//주소 선택지 출력
+			addressList = "<option value='";
+			addressList += item.address.addressId 
+			addressList += "'>"
+			addressList += item.address.address
+			addressList += "</option>"
+			$("#addressId").append(addressList);
+			
 			})
 			$("#selectStaff").append(staffList);
+			
 		}
 	})
 	
 	$("#nextBtn").click(function(){
 		//전체 수 출력
 		$.ajax({
-			url : "/business/selectStaffCount",
+			url : "/sakila/business/selectStaffCount",
 			method :"get",
 			success : function(json){
 				count = Number(json);
@@ -119,7 +169,7 @@
 		$("#selectStaff").empty();
 		//리스트 출력
 		$.ajax({
-			url : "/business/selectStaffList",
+			url : "/sakila/business/selectStaffList",
 			method :"get",
 			data :{"currentPage": currentPage},
 			success : function(json){
@@ -135,11 +185,7 @@
 				})
 				$("#selectStaff").append(staffList);
 			}
-			
-		})
-		
-		
-		
+		})		
 	})
 	
 	$("#preBtn").click(function(){
@@ -152,7 +198,7 @@
 			console.log("이전",currentPage);
 			
 			$.ajax({
-			url : "/sakila/business/selectStaffList",
+			url : "/sakila/business/insertStaff",
 			method : "get",
 			data : {"currentPage": currentPage},
 			success : function(json){
@@ -169,6 +215,25 @@
 					$("#selectStaff").append(staffList);
 				}
 			})
+	})
+	
+	$("#addStaff").click(function(){
+		
+		$.ajax({
+			url :"/sakila/business/insertStaff",
+			method : "post",
+			data : {"storeId" : $("#storeId").val(),
+					"addressId" :$("#addressId").val(),
+					"firstName" : $("#firstName").val(),
+					"lastName" : $("#lastName").val(),
+					"email" : $("#email").val(),
+					"userName" : $("#userName").val()
+					},
+			success : function(){
+				console.log("입력성공");
+			}
+		})
+	
 	})
 
 </script>

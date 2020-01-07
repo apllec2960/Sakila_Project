@@ -12,6 +12,33 @@ import sakila.address.model.Address;
 import sakila.db.DBHelper;
 
 public class StaffDao {
+	
+	public void insertStaff(Staff staff) {
+		System.out.println("insertStaffDao 실행");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "INSERT into staff(first_name, last_name, address_id, email, store_id, username\r\n" + 
+				") VALUE(?,?,?,?,?,?)";
+		
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,staff.getFirstName());
+			stmt.setString(2, staff.getLastName());
+			stmt.setInt(3, staff.getAddress().getAddressId());
+			stmt.setString(4, staff.getEmail());
+			stmt.setInt(5, staff.getStore().getStoreId());
+			stmt.setString(5, staff.getUserName());
+			rs = stmt.executeQuery();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBHelper.close(rs, stmt, conn);
+		}
+	}
+
+	
 	//스태프 테이블에 행의 수를 구하는 메소드
 	public int selectStaffCount() {
 		System.out.println("selectStaffCount Dao 실행");
@@ -43,7 +70,7 @@ public class StaffDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT s.store_id, ad.address, CONCAT(st.first_name, ' ', st.last_name) staffName, s.last_update "+
+		String sql = "SELECT s.store_id, ad.address, ad.address_id, st.email, CONCAT(st.first_name, ' ', st.last_name) staffName, s.last_update "+
 				 	 "FROM store s	INNER JOIN address ad  INNER JOIN staff st "+
 				 	 "ON s.address_id = ad.address_id AND s.manager_staff_id = st.staff_id "+
 				 	 "LIMIT ?,?";
@@ -70,8 +97,10 @@ public class StaffDao {
 				
 				staff.getStore().setStoreId(rs.getInt("s.store_id"));
 				staff.getAddress().setAddress(rs.getString("ad.address"));
+				staff.getAddress().setAddressId(rs.getInt("ad.address_id"));
 				staff.setStaffName(rs.getString("staffName"));
 				staff.setLastUpdate(rs.getString("s.last_update"));
+				staff.setEmail(rs.getString("st.email"));
 				
 				list.add(staff);
 			}
