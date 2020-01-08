@@ -29,7 +29,7 @@ public class StaffDao {
 			stmt.setInt(3, staff.getAddress().getAddressId());
 			stmt.setString(4, staff.getEmail());
 			stmt.setInt(5, staff.getStore().getStoreId());
-			stmt.setString(5, staff.getUserName());
+			stmt.setString(6, staff.getUserName());
 			rs = stmt.executeQuery();
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sakila.address.model.Address;
 import sakila.business.model.Staff;
 import sakila.business.model.StaffDao;
+import sakila.business.model.Store;
 
 /**
  * Servlet implementation class insertStaff
@@ -28,9 +30,11 @@ public class insertStaff extends HttpServlet {
 		String email = request.getParameter("email");
 		String userName = request.getParameter("userName");
 		
-		System.out.println(storeId+""+addressId+""+firstName+""+lastName+""+email+""+userName);
+		System.out.println(storeId+"/"+addressId+"/"+firstName+"/"+lastName+"/"+email+"/"+userName);
 		
 		Staff staff = new Staff();
+		staff.setStore(new Store());
+		staff.setAddress(new Address());
 		staff.getStore().setStoreId(storeId);
 		staff.getAddress().setAddressId(addressId);
 		staff.setFirstName(firstName);
